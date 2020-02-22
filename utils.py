@@ -239,9 +239,12 @@ def get_model_list(dirname, key):
 
 def load_vgg16(model_dir):
     import torchvision
-    net = torchvision.models.vgg16_bn(pretrained=True)
+    net = torchvision.models.vgg16(pretrained=True)
     del net.classifier
     del net.avgpool
+    #for i in range(15):
+    #    del net.features[-1]
+    print(net)
     net.forward = lambda x: net.features(x)
     return net
 
